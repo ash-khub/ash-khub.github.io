@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aishwarya Khubchandani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#090909;--surface:#131313;--surface2:#1a1a1a;--border:#242424;
+  --muted:#444;--mid:#777;--text:#dedad3;--accent:#c8a96e;
+  --accent-dim:rgba(200,169,110,0.1);--white:#f4f0e8;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Outfit',system-ui,sans-serif;
+  --mono:'DM Mono',monospace;
+  --max:1140px;--pad:clamp(1.25rem,4vw,3.5rem);
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.15rem var(--pad);background:rgba(9,9,9,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--white);text-decoration:none}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--mid);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:400;transition:color 0.18s}
+.nav-links a:hover{color:var(--white)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 var(--pad) 5.5rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 70% 40%,#1c1508 0%,#090909 70%)}
+.hero-dots{position:absolute;inset:0;z-index:0;background-image:radial-gradient(circle,rgba(200,169,110,0.07) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent)}
+.hero-content{position:relative;z-index:1;max-width:var(--max);margin:0 auto;width:100%}
+.hero-eyebrow{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:2rem;opacity:0;animation:fadeUp 0.7s ease forwards 0.2s}
+.hero-name{font-family:var(--serif);font-size:clamp(4rem,8.5vw,8.5rem);line-height:0.92;font-weight:400;color:var(--white);margin-bottom:3rem;opacity:0;animation:fadeUp 0.7s ease forwards 0.4s}
+.hero-name em{font-style:italic;color:var(--accent);display:block}
+.hero-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:3rem;opacity:0;animation:fadeUp 0.7s ease forwards 0.6s}
+.hero-desc{font-size:1rem;color:var(--mid);max-width:500px;line-height:1.9}
+.hero-desc strong{color:var(--text);font-weight:400}
+.hero-ctas{display:flex;gap:0.75rem;flex-shrink:0}
+
+/* BUTTONS */
+.btn{display:inline-block;padding:0.72rem 1.65rem;font-size:0.76rem;letter-spacing:0.11em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all 0.18s;font-family:var(--sans);font-weight:400}
+.btn-solid{background:var(--accent);color:var(--black)}
+.btn-solid:hover{background:#d6b87a}
+.btn-outline{border:1px solid var(--border);color:var(--mid)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+
+/* MARQUEE */
+.stats-strip{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden}
+.stats-inner{display:flex;animation:marquee 30s linear infinite;white-space:nowrap}
+.stats-inner:hover{animation-play-state:paused}
+.stat-item{display:flex;align-items:center;gap:1.25rem;padding:1.35rem 3rem;border-right:1px solid var(--border);flex-shrink:0}
+.stat-num{font-family:var(--serif);font-size:1.5rem;color:var(--accent);line-height:1}
+.stat-lbl{font-size:0.7rem;color:var(--mid);letter-spacing:0.07em;text-transform:uppercase}
+
+/* SECTIONS */
+section{padding:6rem 0}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.label{display:inline-block;font-family:var(--mono);font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:0.9rem}
+.section-title{font-family:var(--serif);font-size:clamp(2rem,4vw,3.2rem);font-weight:400;color:var(--white);line-height:1.05;margin-bottom:3rem}
+.section-title em{font-style:italic;color:var(--accent)}
+.divider{height:1px;background:var(--border)}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.about-text p{font-size:0.97rem;color:var(--mid);line-height:1.95;margin-bottom:1.25rem}
+.about-text p strong{color:var(--text);font-weight:400}
+.info-row{display:flex;flex-direction:column;padding:1rem 0;border-bottom:1px solid var(--border)}
+.info-row:first-child{border-top:1px solid var(--border)}
+.info-key{font-family:var(--mono);font-size:0.59rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem}
+.info-val{font-size:0.88rem;color:var(--text)}
+.info-val a{color:var(--accent);text-decoration:none}
+.info-val a:hover{text-decoration:underline}
+
+/* ATHLETICS */
+.ath-section{background:var(--surface);padding:6rem var(--pad)}
+.ath-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.ath-stats{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2.5rem}
+.ath-stat-num{font-family:var(--serif);font-size:2.8rem;color:var(--accent);line-height:1;margin-bottom:0.3rem}
+.ath-stat-lbl{font-size:0.72rem;color:var(--mid);letter-spacing:0.08em;text-transform:uppercase;line-height:1.4}
+.ath-text p{font-size:0.97rem;color:var(--mid);line-height:1.95;margin-bottom:1.1rem}
+.ath-text p strong{color:var(--text);font-weight:400}
+.honor-list{list-style:none}
+.honor-row{display:flex;gap:1rem;align-items:flex-start;padding:0.9rem 0;border-bottom:1px solid var(--border)}
+.honor-row:first-child{border-top:1px solid var(--border)}
+.honor-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:0.58rem;flex-shrink:0}
+.honor-text{font-size:0.88rem;color:var(--text);line-height:1.45}
+.honor-sub{font-size:0.73rem;color:var(--muted);display:block;margin-top:0.15rem}
+
+/* CHIPS */
+.chip{display:inline-block;padding:0.28rem 0.7rem;border:1px solid var(--border);border-radius:2px;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid)}
+.chip.hi{border-color:rgba(200,169,110,0.5);color:var(--accent);background:var(--accent-dim)}
+
+/* PROJECTS */
+.projects-grid{display:flex;flex-direction:column;gap:2px}
+.proj-card{background:var(--surface);border:1px solid var(--border);border-radius:2px;overflow:hidden;transition:border-color 0.2s}
+.proj-card:hover{border-color:rgba(200,169,110,0.4)}
+.proj-header{display:grid;grid-template-columns:56px 1fr auto;align-items:center;gap:1.5rem;padding:1.75rem 2rem;cursor:pointer;user-select:none}
+.proj-num{font-family:var(--mono);font-size:0.62rem;color:var(--muted);letter-spacing:0.15em}
+.proj-head-right{min-width:0}
+.proj-title{font-family:var(--serif);font-size:1.4rem;font-weight:400;color:var(--white);margin-bottom:0.25rem;line-height:1.2}
+.proj-meta{font-size:0.75rem;color:var(--muted);letter-spacing:0.05em}
+.proj-toggle{font-size:1.2rem;color:var(--muted);transition:transform 0.3s,color 0.2s;flex-shrink:0;width:28px;text-align:center}
+.proj-card.open .proj-toggle{transform:rotate(45deg);color:var(--accent)}
+
+.proj-body{max-height:0;overflow:hidden;transition:max-height 0.45s ease}
+.proj-card.open .proj-body{max-height:1200px}
+.proj-body-inner{padding:0 2rem 2rem;border-top:1px solid var(--border)}
+
+.proj-chips{display:flex;gap:0.4rem;flex-wrap:wrap;padding:1.25rem 0 1.5rem}
+
+.proj-section-title{font-family:var(--serif);font-size:1.1rem;font-weight:400;color:var(--white);margin-bottom:0.6rem;margin-top:1.75rem}
+.proj-section-title:first-of-type{margin-top:0}
+.proj-p{font-size:0.93rem;color:var(--mid);line-height:1.9;margin-bottom:0.9rem}
+.proj-p strong{color:var(--text);font-weight:400}
+.proj-ul{list-style:none;display:flex;flex-direction:column;gap:0.55rem;margin-bottom:0.9rem}
+.proj-ul li{font-size:0.91rem;color:var(--mid);line-height:1.7;padding-left:1.25rem;position:relative}
+.proj-ul li::before{content:"—";position:absolute;left:0;color:var(--accent)}
+.proj-ul li strong{color:var(--text);font-weight:400}
+.proj-hbox{background:var(--black);border:1px solid var(--border);border-left:3px solid var(--accent);padding:1.25rem 1.5rem;margin:1.5rem 0}
+.proj-hbox p{font-size:0.9rem;color:var(--mid);line-height:1.8;margin:0}
+.proj-hbox p strong{color:var(--text);font-weight:400}
+.proj-link{display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--mono);font-size:0.68rem;color:var(--accent);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;margin-top:0.5rem}
+.proj-link:hover{text-decoration:underline}
+
+/* CONTACT */
+.contact-section{background:var(--surface);padding:6rem var(--pad)}
+.contact-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem}
+.contact-text{font-size:0.97rem;color:var(--mid);line-height:1.9;margin-bottom:2rem}
+.contact-text strong{color:var(--text);font-weight:400}
+.contact-link-item{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--border);text-decoration:none;color:var(--text);font-size:0.88rem;transition:color 0.18s}
+.contact-link-item:first-child{border-top:1px solid var(--border)}
+.contact-link-item:hover{color:var(--accent)}
+.cli-label{display:flex;flex-direction:column;gap:0.2rem}
+.cli-type{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)}
+.cli-arrow{color:var(--accent)}
+.note-box{background:var(--black);border:1px solid var(--border);border-left:3px solid var(--accent);padding:1.5rem;margin-top:2rem}
+.note-box h4{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.7rem}
+.note-box p{font-size:0.83rem;color:var(--mid);line-height:1.75;margin:0}
+.note-box p strong{color:var(--text);font-weight:400}
+.interest-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)}
+.interest-card{background:var(--black);padding:1.5rem}
+.interest-card h4{font-size:0.88rem;color:var(--white);font-weight:400;margin-bottom:0.4rem}
+.interest-card p{font-size:0.78rem;color:var(--muted);line-height:1.6}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2.5rem var(--pad);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+footer p{font-size:0.72rem;color:var(--muted);letter-spacing:0.04em}
+footer a{color:var(--mid);text-decoration:none}
+footer a:hover{color:var(--accent)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero-foot{flex-direction:column;align-items:flex-start}
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .ath-inner{grid-template-columns:1fr;gap:3rem}
+  .ath-stats{grid-template-columns:1fr 1fr}
+  .contact-inner{grid-template-columns:1fr;gap:3rem}
+  .interest-grid{grid-template-columns:1fr}
+  .proj-header{grid-template-columns:40px 1fr auto}
+  .nav-links{gap:1.25rem}
+  .nav-links a{font-size:0.7rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Aishwarya<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#athletics">Athletics</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Cornell University · Information Science</p>
+    <h1 class="hero-name">Aishwarya<em>Khubchandani</em></h1>
+    <div class="hero-foot">
+      <p class="hero-desc"><strong>Analyst, strategist, builder.</strong> I work at the intersection of business and technology — turning complex problems into clear thinking, and clear thinking into results.</p>
+      <div class="hero-ctas">
+        <a href="#work" class="btn btn-solid">View Work</a>
+        <a href="#contact" class="btn btn-outline">Contact</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS MARQUEE -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item"><span class="stat-num">3×</span><span class="stat-lbl">All-American</span></div>
+    <div class="stat-item"><span class="stat-num">#1</span><span class="stat-lbl">India Junior Rankings</span></div>
+    <div class="stat-item"><span class="stat-num">2×</span><span class="stat-lbl">CSA Scholar-Athlete</span></div>
+    <div class="stat-item"><span class="stat-num">1×</span><span class="stat-lbl">All-Ivy League</span></div>
+    <div class="stat-item"><span class="stat-num">Google</span><span class="stat-lbl">Industry Collaboration</span></div>
+    <div class="stat-item"><span class="stat-num">Cornell</span><span class="stat-lbl">Information Science</span></div>
+    <div class="stat-item"><span class="stat-num">Ivy</span><span class="stat-lbl">Varsity Squash</span></div>
+    <div class="stat-item"><span class="stat-num">Betty Richey</span><span class="stat-lbl">Award Nominee</span></div>
+    <div class="stat-item"><span class="stat-num">3×</span><span class="stat-lbl">All-American</span></div>
+    <div class="stat-item"><span class="stat-num">#1</span><span class="stat-lbl">India Junior Rankings</span></div>
+    <div class="stat-item"><span class="stat-num">2×</span><span class="stat-lbl">CSA Scholar-Athlete</span></div>
+    <div class="stat-item"><span class="stat-num">1×</span><span class="stat-lbl">All-Ivy League</span></div>
+    <div class="stat-item"><span class="stat-num">Google</span><span class="stat-lbl">Industry Collaboration</span></div>
+    <div class="stat-item"><span class="stat-num">Cornell</span><span class="stat-lbl">Information Science</span></div>
+    <div class="stat-item"><span class="stat-num">Ivy</span><span class="stat-lbl">Varsity Squash</span></div>
+    <div class="stat-item"><span class="stat-num">Betty Richey</span><span class="stat-lbl">Award Nominee</span></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <p class="label">About</p>
+    <h2 class="section-title">More than <em>one thing.</em></h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a final-year student at <strong>Cornell University</strong> studying Information Science, with coursework across data analysis, systems design, human-centered research, and technology strategy. I'm looking for <strong>full-time roles starting summer 2025</strong> in strategy, data analytics, or business operations — particularly where business meets technology.</p>
+        <p>I've spent my Cornell years doing things most people keep separate: competing at the highest level of collegiate squash while doing rigorous academic and industry work. That combination — <strong>discipline under pressure, structured thinking, and relentless follow-through</strong> — is something I bring to every room I'm in.</p>
+        <p>Whether it's researching the future of enterprise work for Google, analyzing user behavior, or building platforms that run real operations, I'm drawn to problems that are messy, complex, and worth solving. I don't think of myself as locked into any one domain. The skill is the thinking — the domain is the context.</p>
+      </div>
+      <div>
+        <div class="info-row"><span class="info-key">Currently</span><span class="info-val">Cornell University · B.S. Information Science</span></div>
+        <div class="info-row"><span class="info-key">Seeking</span><span class="info-val">Full-time Analyst · Strategy · Data Analytics · Business Ops</span></div>
+        <div class="info-row"><span class="info-key">Interested in</span><span class="info-val">Firmwide strategy · Client analytics · Digital operations · Consulting</span></div>
+        <div class="info-row"><span class="info-key">Athletics</span><span class="info-val">Varsity Squash, Cornell Big Red · 3× All-American</span></div>
+        <div class="info-row"><span class="info-key">LinkedIn</span><span class="info-val"><a href="https://www.linkedin.com/in/aishwarya-khubchandani" target="_blank">linkedin.com/in/aishwarya-khubchandani</a></span></div>
+        <div class="info-row"><span class="info-key">Based in</span><span class="info-val">Ithaca, NY · open to relocation</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ATHLETICS -->
+<div id="athletics" class="ath-section">
+  <div class="ath-inner">
+    <div>
+      <p class="label">Athletics</p>
+      <h2 class="section-title" style="margin-bottom:2rem">From India<br>to <em>the Ivy League.</em></h2>
+      <div class="ath-stats">
+        <div><div class="ath-stat-num">3×</div><div class="ath-stat-lbl">All-American<br>Cornell University</div></div>
+        <div><div class="ath-stat-num">#1</div><div class="ath-stat-lbl">India Junior<br>Rankings 2019</div></div>
+        <div><div class="ath-stat-num">2×</div><div class="ath-stat-lbl">CSA Scholar-<br>Athlete Award</div></div>
+        <div><div class="ath-stat-num">1×</div><div class="ath-stat-lbl">All-Ivy League<br>Honoree</div></div>
+      </div>
+      <div class="ath-text">
+        <p>I picked up squash young and worked my way through the Indian junior circuit, eventually becoming <strong>the #1 ranked junior player in India</strong> across every age category and winning the national championship in 2019. Representing your country at that level gives you a competitive baseline that doesn't go away.</p>
+        <p>At Cornell, competing in the Ivy League while keeping up with everything else forced me to get very good at <strong>prioritizing, managing energy, and thinking clearly under pressure</strong>. Three All-American selections aren't one good season — they're sustained performance across years. As <strong>team captain</strong>, I also handled daily logistics, managed team dynamics, and was accountable for outcomes beyond my control — directly informing one of my projects.</p>
+      </div>
+    </div>
+    <ul class="honor-list">
+      <li class="honor-row"><span class="honor-dot"></span><div><span class="honor-text">Indian Junior National Champion</span><span class="honor-sub">2019 · #1 in India across every junior age category</span></div></li>
+      <li class="honor-row"><span class="honor-dot"></span><div><span class="honor-text">3× All-American</span><span class="honor-sub">Cornell University · College Squash Association</span></div></li>
+      <li class="honor-row"><span class="honor-dot"></span><div><span class="honor-text">2× CSA Scholar-Athlete Award</span><span class="honor-sub">Academic + athletic excellence</span></div></li>
+      <li class="honor-row"><span class="honor-dot"></span><div><span class="honor-text">All-Ivy League</span><span class="honor-sub">Ivy League Athletic Conference</span></div></li>
+      <li class="honor-row"><span class="honor-dot"></span><div><span class="honor-text">Betty Richey Award Nominee</span><span class="honor-sub">Cornell Athletics</span></div></li>
+      <li class="honor-row"><span class="honor-dot"></span><div><span class="honor-text">Team Captain</span><span class="honor-sub">Cornell Varsity Squash</span></div></li>
+    </ul>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- WORK -->
+<section id="work">
+  <div class="wrap">
+    <p class="label">Work</p>
+    <h2 class="section-title">Projects &amp; <em>Experience</em></h2>
+    <div class="projects-grid">
+
+      <!-- PROJECT 1 — GOOGLE -->
+      <div class="proj-card" id="pc1">
+        <div class="proj-header" onclick="toggleProj('pc1')">
+          <span class="proj-num">01</span>
+          <div class="proj-head-right">
+            <h3 class="proj-title">Futuristic Workplace Strategy — Google</h3>
+            <p class="proj-meta">Strategy Research · Industry Collaboration</p>
+          </div>
+          <span class="proj-toggle">+</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-body-inner">
+            <div class="proj-chips">
+              <span class="chip hi">Google</span>
+              <span class="chip">Strategy</span>
+              <span class="chip">Research</span>
+              <span class="chip">Design Sprints</span>
+              <span class="chip">Executive Presentation</span>
+            </div>
+
+            <h4 class="proj-section-title">The brief</h4>
+            <p class="proj-p">Google's internal Cloud tooling team — the organization that builds the core tools their own employees use across Marketing, Sales, Finance, and Support — wanted to look ten years ahead. The question: <strong>how will significant technology and societal trends reshape how enterprise employees work, and what should we build or redesign in response?</strong></p>
+            <p class="proj-p">This wasn't an academic exercise. The findings would go directly to senior stakeholders to inform real product roadmaps. That context changed how rigorously we approached everything.</p>
+
+            <h4 class="proj-section-title">What we explored</h4>
+            <p class="proj-p">Using a triangular research approach — secondary literature review, design sprints, and internal stakeholder interviews — we investigated the trends most likely to impact enterprise work:</p>
+            <ul class="proj-ul">
+              <li><strong>AI adoption in the enterprise</strong> — not as a future concept but as an ongoing transformation already changing what workers are expected to do and how tools need to respond</li>
+              <li><strong>Hybrid and remote work</strong> — how the breakdown of physical co-presence changes collaboration expectations, tooling requirements, and organizational culture</li>
+              <li><strong>Consumer tech expectations bleeding into the workplace</strong> — workers increasingly expect enterprise software to match the quality and intuitiveness of their personal apps, creating pressure on internal teams</li>
+              <li><strong>Workforce and skills evolution</strong> — how job roles are shifting and what that means for how tooling should support continuous learning and adaptability</li>
+            </ul>
+
+            <div class="proj-hbox">
+              <p><strong>The core tension we kept returning to:</strong> enterprise tooling has historically prioritized standardization and control. But AI and rising consumer expectations are pushing hard in the opposite direction — toward personalization, intelligence, and individual agency. How does a large internal team navigate that?</p>
+            </div>
+
+            <h4 class="proj-section-title">My contribution</h4>
+            <p class="proj-p">I worked in the research track, responsible for synthesizing external literature on technology and workforce trends into clear, evidenced summaries that the broader team could draw on during design sprints. This required separating signal from noise across a large body of research and framing findings in a way that a non-specialist executive audience could act on — not just understand.</p>
+            <p class="proj-p">I also participated actively in design sprint sessions: structured exercises where we rapidly ideated, sketched, and pressure-tested system concepts against specific trends. These required exactly the kind of thinking that bridges strategy and execution — generating options fast, defending choices under scrutiny, and being willing to kill ideas that don't hold up.</p>
+            <p class="proj-p">I contributed to the <strong>final executive presentation</strong>, which synthesized 14 weeks of research and prototyping into a narrative appropriate for senior Google leadership — clear point of view, no hedging, direct implications.</p>
+
+            <h4 class="proj-section-title">What it delivered</h4>
+            <p class="proj-p">Three things to the Google team: a research brief summarizing the top trends most relevant to their roadmap, a set of high-fidelity prototype concepts showing how their tooling could evolve in response, and a polished presentation delivered to senior stakeholders.</p>
+
+            <div class="proj-hbox">
+              <p><strong>What I took away:</strong> Good strategy research isn't about having the right answer — it's about framing the right question and packaging findings in a way that enables action. That translation between evidence and decision is a skill I'll carry into any business or analytical role.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 2 — SQUASHXTREME -->
+      <div class="proj-card" id="pc2">
+        <div class="proj-header" onclick="toggleProj('pc2')">
+          <span class="proj-num">02</span>
+          <div class="proj-head-right">
+            <h3 class="proj-title">SquashXtreme — Academy Platform</h3>
+            <p class="proj-meta">Full-Stack Development · Operations</p>
+          </div>
+          <span class="proj-toggle">+</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-body-inner">
+            <div class="proj-chips">
+              <span class="chip hi">Full-Stack</span>
+              <span class="chip">Razorpay API</span>
+              <span class="chip">CMS</span>
+              <span class="chip">Tournament Management</span>
+              <span class="chip">Operations</span>
+            </div>
+
+            <h4 class="proj-section-title">The problem</h4>
+            <p class="proj-p">The squash academy — a real training organization in India — was running entirely on informal systems: WhatsApp for communications, manual spreadsheets for tournament registration, no digital payment infrastructure, and no way for staff to update information without calling someone technical. As someone who grew up in the Indian squash community, I knew exactly how much friction this created on every side.</p>
+            <p class="proj-p">The goal wasn't to build a brochure website. It was to build an <strong>operational platform</strong> — something that actually changes how the academy runs day to day and that a non-technical team can own independently.</p>
+
+            <div class="proj-hbox">
+              <p><strong>The constraint that made this interesting:</strong> Stripe — the default payment API for most modern platforms — doesn't operate in India. That meant researching the local payments landscape, choosing an alternative, and integrating it correctly. Getting payments wrong doesn't just lose a transaction, it loses trust.</p>
+            </div>
+
+            <h4 class="proj-section-title">What I built</h4>
+            <ul class="proj-ul">
+              <li><strong>Content management system</strong> — a non-technical interface that lets academy staff update schedules, coach profiles, news, and event information without any coding knowledge. The system had to be ownable by people who are not developers and would never read documentation.</li>
+              <li><strong>Tournament management</strong> — player registration, bracket management, and result publishing. Tournaments are a core revenue and engagement driver for the academy; the old process of WhatsApp plus spreadsheets created significant coordination overhead and errors.</li>
+              <li><strong>Razorpay payment integration</strong> — India's leading payment gateway, integrated to handle registration fees, membership payments, and tournament entry. This required navigating Razorpay's API documentation, handling payment verification server-side (not just client-side), and building correct failure states so users always know what happened.</li>
+              <li><strong>Workspace configuration</strong> — set up the full admin environment so the team could update content, manage registrations, and run operations without any outside help once the platform launched.</li>
+            </ul>
+
+            <h4 class="proj-section-title">Why it matters</h4>
+            <p class="proj-p">This is a real platform running real operations — not a class project. Every technical decision had a business implication: a broken payment flow costs money; a CMS that's too complex means content goes stale and staff stop using it. That forced me to think like someone running a business, not just someone writing code.</p>
+            <p class="proj-p"><strong>That translation between business need and technical solution</strong> is exactly the kind of work I want to do — whether the tools are code, a process map, or a strategy deck.</p>
+
+            <a href="https://www.squashxtreme.com" target="_blank" class="proj-link">Visit squashxtreme.com →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 3 — SUNTIMER -->
+      <div class="proj-card" id="pc3">
+        <div class="proj-header" onclick="toggleProj('pc3')">
+          <span class="proj-num">03</span>
+          <div class="proj-head-right">
+            <h3 class="proj-title">SunTimer — Behavioral Product Research</h3>
+            <p class="proj-meta">HCI Research · Product Design · INFO 3450</p>
+          </div>
+          <span class="proj-toggle">+</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-body-inner">
+            <div class="proj-chips">
+              <span class="chip hi">User Research</span>
+              <span class="chip">Behavioral Design</span>
+              <span class="chip">Prototyping</span>
+              <span class="chip">Usability Testing</span>
+              <span class="chip">Figma</span>
+            </div>
+
+            <h4 class="proj-section-title">The problem</h4>
+            <p class="proj-p">Problem statement: <em>"Students at Cornell need guidance on maintaining a consistent sun protection routine because their current habits do not prioritize sunscreen application throughout the day, despite knowing the consequences of UV exposure."</em></p>
+            <p class="proj-p">That last clause is the hard part. This wasn't an information gap — <strong>people already knew they should reapply sunscreen and didn't</strong>. The gap between knowledge and behavior is one of the most interesting problems in product design, and the existing solution space (reminder apps, notifications) wasn't solving it.</p>
+
+            <h4 class="proj-section-title">Research process</h4>
+            <p class="proj-p">We ran the full arc from discovery to evaluated prototype:</p>
+            <ul class="proj-ul">
+              <li><strong>Contextual interviews</strong> — conducted in users' actual environments (dorm rooms, bathrooms) where their routines happen. Documented with audio and photos. Two participants interviewed across multiple sessions.</li>
+              <li><strong>Affinity mapping and insight synthesis</strong> — coded interview data into 9 key insights covering everything from family influence on skincare habits to the finding that social reminders (friends, parents) were consistently more effective than digital notifications.</li>
+              <li><strong>Competitive analysis</strong> — mapped the full solution space across digital products (habit apps, UV tracking, skincare personalization) and physical products (UV stickers, wearables, SPF alternatives). Identified the critical gap: no existing product combined the reminder with the physical act of applying sunscreen.</li>
+              <li><strong>Ideation across 60 concepts</strong> — I served as devil's advocate during selection, systematically stress-testing feasibility and assumptions for each shortlisted idea using evidence from our interviews.</li>
+              <li><strong>Paper prototype and user testing</strong> — built and tested a lo-fi version, documenting specific usability failures: missing "done" button, unclear dermat score labeling, confusing overlap between container and app functions.</li>
+              <li><strong>Figma hi-fi prototype and heuristic evaluation</strong> — evaluated against Nielsen's usability principles, prioritized violations by severity, and iterated to the final version.</li>
+              <li><strong>Structured usability test</strong> — ran sessions with think-aloud protocol and post-session Q&A, then resolved three major design problems in the final iteration.</li>
+            </ul>
+
+            <h4 class="proj-section-title">The solution</h4>
+            <p class="proj-p">A <strong>portable sunscreen container with a built-in twist-dial timer</strong>, paired with a companion mobile app. The key design insight: to silence the alarm, you have to physically open the container — which puts the sunscreen directly in your hand. The reminder and the remedy are the same object. You can't dismiss the notification without completing the action.</p>
+            <p class="proj-p">The app handled remote timer configuration, weather and UV index, and personalized tips. But it was deliberately secondary — the physical object was always the primary interaction surface, because applying sunscreen is an inherently physical act.</p>
+
+            <h4 class="proj-section-title">My specific contributions</h4>
+            <ul class="proj-ul">
+              <li>Conducted contextual interviews and documented behavioral patterns and attitudes around sunscreen reapplication</li>
+              <li>Served as devil's advocate in design selection — presented failure modes and counterarguments for each concept, grounded in interview data</li>
+              <li>Designed the core reapplication interaction: the decision that opening the container is the only way to dismiss the alarm was mine, and it became the product's defining mechanic</li>
+              <li>Co-wrote the usability test protocol, think-aloud instructions, and post-session Q&A script</li>
+              <li>Identified and resolved the overlapping container/app feature set that was confusing users in testing</li>
+            </ul>
+
+            <div class="proj-hbox">
+              <p><strong>What I learned about research:</strong> The most important skill isn't generating insights — it's knowing which ones are decision-relevant. We had 9 findings; only 2 actually shaped our final design. The discipline of saying "interesting but not actionable" transfers directly into any analytical or strategy context.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 4 — SQUADSYNC -->
+      <div class="proj-card" id="pc4">
+        <div class="proj-header" onclick="toggleProj('pc4')">
+          <span class="proj-num">04</span>
+          <div class="proj-head-right">
+            <h3 class="proj-title">SquadSync — Operations Redesign</h3>
+            <p class="proj-meta">Process Improvement · Participatory Design · INFO 4240</p>
+          </div>
+          <span class="proj-toggle">+</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-body-inner">
+            <div class="proj-chips">
+              <span class="chip hi">Systems Thinking</span>
+              <span class="chip">Operations</span>
+              <span class="chip">Process Improvement</span>
+              <span class="chip">Participatory Design</span>
+            </div>
+
+            <h4 class="proj-section-title">The operational problem</h4>
+            <p class="proj-p">As captain of Cornell's varsity squash team, one of my daily responsibilities was coordinating rides to the courts for 14 players. The system: post a message in the iMessage group chat with the pickup location and time, and players "like" it if they need that ride.</p>
+            <p class="proj-p">In theory, simple. In practice: a daily coordination nightmare. The group chat was also used for all team conversation, so the logistics message would regularly get buried under 40 other messages. Drivers had zero visibility into how many seats were actually needed. When more people liked a message than there were seats, I had to manually find another driver — usually while I was in class. And there was no way to cancel a request on iMessage, so I'd sometimes show up to a pickup with fewer people than expected having made arrangements for more.</p>
+
+            <div class="proj-hbox">
+              <p><strong>What made this a good design problem:</strong> I had deep operational expertise — I understood every edge case, every workaround, every social dynamic involved. That kind of tacit knowledge is exactly what's needed to design a system that works in the real world, not just in theory. The challenge was externalizing it.</p>
+            </div>
+
+            <h4 class="proj-section-title">The design process</h4>
+            <p class="proj-p">This project used a participatory design methodology — specifically role-play and simulation. My design partner set up a workspace with post-it notes representing cars, riders, and pickup locations. I walked her through my process while she simulated being the coordinator, acting out the role while I played riders and drivers.</p>
+            <p class="proj-p">That simulation immediately surfaced things that were nearly impossible to explain abstractly:</p>
+            <ul class="proj-ul">
+              <li><strong>The overflow problem in real time</strong> — when 6 riders liked a message for a 4-seat car, the resolution required finding another driver fast and communicating the change before people left for their pickup spots. Watching someone else try to manage this made obvious how much cognitive load I was carrying daily.</li>
+              <li><strong>The cancel problem</strong> — we realized mid-simulation that riders changing their plans had no recourse. The designer hadn't anticipated this; I had lived it but normalized it. A cancel button became an obvious requirement.</li>
+              <li><strong>Tacit knowledge made visible</strong> — I had internalized dozens of informal rules about which routes were high-demand, who was reliable, how to read the chat to know if someone missed their ride. None of it was documented. Externalizing it through simulation made it designable.</li>
+            </ul>
+
+            <h4 class="proj-section-title">The solution — SquadSync</h4>
+            <p class="proj-p">A physical clicker device, synced to a driver dashboard, that automates the coordination logic I was doing manually in my head every day:</p>
+            <ul class="proj-ul">
+              <li><strong>Location buttons</strong> — preset pickup zones for different parts of campus. Riders press a button to signal where they are and request a ride. No group chat, no buried messages.</li>
+              <li><strong>Automated overflow</strong> — when requests exceed available seats, the system automatically contacts the nearest driver with empty capacity and routes them to the overflow location. No manual scrambling.</li>
+              <li><strong>Cancel functionality</strong> — riders press again to cancel, eliminating the phantom-rider problem entirely.</li>
+              <li><strong>Driver dashboards</strong> — real-time view of who they're picking up and from where, with no ambiguity.</li>
+            </ul>
+
+            <h4 class="proj-section-title">Why this is a business problem, not just a design problem</h4>
+            <p class="proj-p">The framing that matters: this was a <strong>process improvement project</strong>. The current system had high cognitive load, poor information visibility, no error recovery, and no audit trail. The solution reduced that load through automation, standardized inputs, and clear feedback loops — the same moves you'd make improving any business operation.</p>
+            <p class="proj-p">Diagnosis → root cause → redesign. The tools were post-its and a whiteboard. The framework is universally applicable.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<div id="contact" class="contact-section">
+  <div class="contact-inner">
+    <div>
+      <p class="label">Contact</p>
+      <h2 class="section-title" style="margin-bottom:1.5rem">Let's <em>connect.</em></h2>
+      <p class="contact-text">I'm actively looking for <strong>full-time analyst roles starting summer 2025</strong>. If you're working on something at the intersection of strategy, data, and technology — I'd love to talk.</p>
+      <a href="https://www.linkedin.com/in/aishwarya-khubchandani" target="_blank" class="contact-link-item">
+        <div class="cli-label"><span class="cli-type">LinkedIn</span><span>linkedin.com/in/aishwarya-khubchandani</span></div>
+        <span class="cli-arrow">↗</span>
+      </a>
+      <a href="https://www.squashxtreme.com" target="_blank" class="contact-link-item">
+        <div class="cli-label"><span class="cli-type">Project — Live site</span><span>squashxtreme.com</span></div>
+        <span class="cli-arrow">↗</span>
+      </a>
+      <div class="note-box">
+        <h4>Custom email coming soon</h4>
+        <p>Setting up a personal domain — once it's live you'll find a proper email here. Until then <strong>LinkedIn is the best way to reach me</strong> and is checked daily.</p>
+      </div>
+    </div>
+    <div>
+      <p class="label" style="margin-bottom:1.5rem">What I'm looking for</p>
+      <div class="interest-grid">
+        <div class="interest-card"><h4>Strategy & Consulting</h4><p>Firmwide strategy, corporate development, or consulting where analytical rigor and cross-functional thinking matter.</p></div>
+        <div class="interest-card"><h4>Data Analytics</h4><p>Client analytics, business intelligence, or data operations — turning data into decisions, not just reports.</p></div>
+        <div class="interest-card"><h4>Digital Operations</h4><p>Business operations at the tech/business intersection — digital transformation, process improvement, ops strategy.</p></div>
+        <div class="interest-card"><h4>Open to more</h4><p>I don't close off domains. If the work is complex, intellectually demanding, and rewards structured thinking — I'm interested.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Aishwarya Khubchandani</p>
+  <p><a href="https://www.linkedin.com/in/aishwarya-khubchandani" target="_blank">LinkedIn</a></p>
+</footer>
+
+<script>
+function toggleProj(id) {
+  const card = document.getElementById(id);
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.proj-card').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+}
+</script>
+</body>
+</html>
